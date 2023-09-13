@@ -8,63 +8,68 @@ namespace VendingMachineState
 {
     public class Context : IVMState
     {
-        private IVMState currentState;
-        private int money;
-        private int n;
+        private IVMState _currentState;
+        private int _money;
+        private int _n;
         public string item { get; private set; }
 
         public Dictionary<string, Tuple<int, int>> data { get; private set; }
 
         public Context()
         {
-            data = new Dictionary<string, Tuple<int, int>>();
+            data = new Dictionary<string , Tuple<int , int>>
+            {
+                ["coffee"] = Tuple.Create( 20 , 15 ) ,
+                ["tea"] = Tuple.Create( 20 , 12 ) ,
+                ["milk"] = Tuple.Create( 20 , 10 )
+            };
 
-            data["coffee"] = Tuple.Create(20,15);
-            data["tea"] = Tuple.Create(20, 12);
-            data["milk"] = Tuple.Create(20, 10);
-
-            currentState = new WaitState(data);
-            money = 0;
-            n = 0;
+            _currentState = new WaitState(data);
+            _money = 0;
+            _n = 0;
             item = "";
 
 
         }
         public bool DispenseItem()
         {
-            if (currentState.DispenseItem())
+            if (_currentState.DispenseItem())
             {
-                currentState = new WaitState(data);
+                _currentState = new WaitState(data);
                 return true;
             }
-            else 
+            else
+            {
                 return false;
+            }
         }
 
         public string GetStateString()
         {
-            return currentState.GetStateString();
+            return _currentState.GetStateString();
         }
 
         public bool InsertMoney(int _money)
         {
-            if (currentState.InsertMoney(_money))
+            if (_currentState.InsertMoney(_money))
             {
-                money = _money;
-                currentState = new DispenseState(money, item, n, data);
+                this._money = _money;
+                _currentState = new DispenseState( this._money , item , _n , data );
                 return true;
             }
             else
+            {
                 return false;
+            }
         }
 
         public bool SelectItem(string _item, int _n)
         {
             item = _item;
-            n = _n;
-            if (currentState.SelectItem(_item, _n))
+            this._n = _n;
+            if (_currentState.SelectItem(_item, _n))
             {
-                currentState = new AskMoneyState(item, n, data);
+                _currentState = new AskMoneyState( item , this._n, data );
                 return true;
             }
             

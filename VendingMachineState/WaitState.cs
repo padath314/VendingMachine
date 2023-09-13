@@ -8,13 +8,13 @@ namespace VendingMachineState
 {
     internal class WaitState : IVMState
     {
-        private Dictionary<string, Tuple<int, int>> data;
+        private readonly Dictionary<string, Tuple<int, int>> _data;
         public WaitState(Dictionary<string, Tuple<int, int>> _data) 
         {
-            data = _data;
+            this._data = _data;
             Console.WriteLine("Items Available are :\n");
             Console.WriteLine("Item\t\tQuantity\tCost");
-            foreach (var kvp in data)
+            foreach (KeyValuePair<string , Tuple<int , int>> kvp in this._data)
             {
                 string itemName = kvp.Key;
                 int quantity = kvp.Value.Item1;
@@ -25,10 +25,12 @@ namespace VendingMachineState
         }
         public bool SelectItem(string item, int n)
         {
-            if (data.ContainsKey(item))
+            if (_data.ContainsKey(item))
             {
-                if (data[item].Item1 >= n)
+                if (_data[item].Item1 >= n)
+                {
                     return true;
+                }
                 else
                 {
                     Console.WriteLine("Quantity not sufficient");

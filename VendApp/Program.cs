@@ -4,11 +4,12 @@ namespace VendApp
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main( string[] args )
         {
+            
             IVMState? currContext = new Context();
 
-            string input = "";
+            string ?input = "";
 
             while(currContext != null && input != "q")
             {
@@ -21,11 +22,11 @@ namespace VendApp
                 switch (input[0])
                 {
                     case 'S':
-                        var inputs = input.Split(':')[1].Split(',');
-                        currContext.SelectItem(inputs[0], Int32.Parse(inputs[1]));
+                        string[] inputs = input.Split(':')[1].Split(',');
+                        currContext.SelectItem(inputs[0], int.Parse(inputs[1]));
                         break;
                     case 'M':
-                        currContext.InsertMoney(Int32.Parse(input.Split(':')[1]));
+                        currContext.InsertMoney( int.Parse(input.Split(':')[1]));
                         break;
                     case 'D':
                         currContext.DispenseItem();

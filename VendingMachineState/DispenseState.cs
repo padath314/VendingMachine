@@ -8,26 +8,26 @@ namespace VendingMachineState
 {
     internal class DispenseState : IVMState
     {
-        private int money;
-        private string item;
-        private int n;
+        private readonly int _money;
+        private readonly string _item;
+        private readonly int _n;
 
-        Dictionary<string, Tuple<int, int>> data;
+        readonly Dictionary<string, Tuple<int, int>> _data;
 
         internal DispenseState(int _money, string _item, int _n, Dictionary<string, Tuple<int, int>> _data)
         {
-            money = _money;
-            item = _item;
-            n = _n;
-            data = _data;
+            this._money = _money;
+            this._item = _item;
+            this._n = _n;
+            this._data = _data;
         }
         public bool DispenseItem()
         {
-            int newValue = data[item].Item1 - n;
-            Tuple<int, int> updatedTuple = new Tuple<int, int>(newValue, data[item].Item2);
-            data[item] = updatedTuple;
+            int newValue = _data[_item].Item1 - _n;
+            Tuple<int , int> updatedTuple = new( newValue , _data[_item].Item2 );
+            _data[_item] = updatedTuple;
 
-            Console.WriteLine($"Recieved amount : {money} \n Dispensed {n} nos. of {item}");
+            Console.WriteLine($"Recieved amount : {_money} \n Dispensed {_n} nos. of {_item}");
             return true;
         }
 
