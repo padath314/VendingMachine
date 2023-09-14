@@ -5,7 +5,7 @@
  * 
  * Product     = VendingMachine
  * 
- * Project     = IVMState
+ * Project     = VendingMachineState
  *
  * Description = This file contains the definition of the IVMState interface,
  *               which defines the contract for various states of a vending machine

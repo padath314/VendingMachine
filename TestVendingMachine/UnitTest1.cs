@@ -1,10 +1,31 @@
-﻿using VendingMachineState;
+﻿/******************************************************************************
+ * Filename    = UnitTest1.cs
+ *
+ * Author      = Susan Varghese Padath
+ *
+ * Product     = VendingMachine
+ * 
+ * Project     = TestVendingMachine
+ *
+ * Description = The UnitTest1 class contains a series of test methods to validate the functionality
+ *               of the vending machine implemented using the State Design Pattern.
+ *****************************************************************************/
+
+using VendingMachineState;
 
 namespace TestVendingMachine
 {
+    /// <summary>
+    /// The UnitTest1 class contains a series of test methods to validate the functionality
+    /// of the vending machine implemented using the State Design Pattern.
+    /// </summary>
     [TestClass]
     public class UnitTest1
     {
+        /// <summary>
+        /// TestSimple method tests a simple scenario of item selection, money insertion,
+        /// and item dispensing.
+        /// </summary>
         [TestMethod]
         public void TestSimple()
         {
@@ -32,6 +53,10 @@ namespace TestVendingMachine
 
         }
 
+        /// <summary>
+        /// TestBuyItemNotAvailable method tests the case where a user attempts to buy
+        /// an item that is not available in the vending machine.
+        /// </summary>
         [TestMethod]
         public void TestBuyItemNotAvailable()
         {
@@ -49,6 +74,9 @@ namespace TestVendingMachine
             Assert.IsFalse(itemDispensed, "Item dispensing should fail (no item selected).");
         }
 
+        /// <summary>
+        /// Tests the case where the user tries to buy coffee with insufficient quantity.
+        /// </summary>
         [TestMethod]
         public void TestBuyCoffeeInsufficientQuantity()
         {
@@ -68,6 +96,9 @@ namespace TestVendingMachine
             Assert.IsFalse(itemDispensed, "Item dispensing should fail.");
         }
 
+        /// <summary>
+        /// Tests the item reset functionality after selecting coffee.
+        /// </summary>
         [TestMethod]
         public void TestResetItem()
         {
@@ -96,6 +127,9 @@ namespace TestVendingMachine
 
         }
 
+        /// <summary>
+        /// Tests inserting money without selecting an item first.
+        /// </summary>
         [TestMethod]
         public void TestInsertMoneyBeforeSelectingItem()
         {
@@ -109,6 +143,9 @@ namespace TestVendingMachine
             Assert.IsFalse(moneyInserted, "Money insertion should fail without selecting an item.");
         }
 
+        /// <summary>
+        /// Tests dispensing an item without selecting an item first.
+        /// </summary>
         [TestMethod]
         public void TestDispenseBeforeSelectingItem()
         {
@@ -122,6 +159,9 @@ namespace TestVendingMachine
             Assert.IsFalse(itemDispensed, "Item dispensing should fail without selecting an item.");
         }
 
+        /// <summary>
+        /// Tests dispensing an item before inserting money.
+        /// </summary>
         [TestMethod]
         public void TestDispenseBeforeInsertingMoney()
         {
@@ -137,6 +177,9 @@ namespace TestVendingMachine
             Assert.IsFalse(itemDispensed, "Item dispensing should fail without inserting money.");
         }
 
+        /// <summary>
+        /// Tests inserting insufficient money for an item.
+        /// </summary>
         [TestMethod]
         public void TestInsertingInsufficientMoney()
         {
@@ -156,6 +199,9 @@ namespace TestVendingMachine
             Assert.IsTrue(itemDispensed, "Item dispensing should succeed.");
         }
 
+        /// <summary>
+        /// Tests buying multiple coffees and milk.
+        /// </summary>
         [TestMethod]
         public void TestBuyMultipleCoffeesAndMilk()
         {
