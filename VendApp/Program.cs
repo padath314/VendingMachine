@@ -4,7 +4,7 @@ namespace VendApp
 {
     internal class Program
     {
-        static void Main( string[] args )
+        static void Main()
         {
             
             IVMState? currContext = new Context();

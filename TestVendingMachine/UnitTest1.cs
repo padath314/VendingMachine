@@ -1,4 +1,4 @@
-using VendingMachineState;
+﻿using VendingMachineState;
 
 namespace TestVendingMachine
 {
@@ -9,10 +9,10 @@ namespace TestVendingMachine
         public void TestSimple()
         {
             // Arrange
-            Context vendingMachine = new Context();
+            Context vendingMachine = new();
 
             // Get the initial amount of coffee
-            int initialCoffeeAmount = vendingMachine.data["coffee"].Item1;
+            int initialCoffeeAmount = vendingMachine.Data["coffee"].Item1;
 
             // Act
             bool itemSelected = vendingMachine.SelectItem("coffee", 2);
@@ -20,7 +20,7 @@ namespace TestVendingMachine
             bool itemDispensed = vendingMachine.DispenseItem();
 
             // Get the updated amount of coffee
-            int updatedCoffeeAmount = vendingMachine.data["coffee"].Item1;
+            int updatedCoffeeAmount = vendingMachine.Data["coffee"].Item1;
 
             // Assert
             Assert.IsTrue(itemSelected, "Item selection failed.");
@@ -36,7 +36,7 @@ namespace TestVendingMachine
         public void TestBuyItemNotAvailable()
         {
             // Arrange
-            Context vendingMachine = new Context();
+            Context vendingMachine = new ();
 
             // Act
             bool itemSelected = vendingMachine.SelectItem("green tea", 1); // Attempt to buy green tea
@@ -53,7 +53,7 @@ namespace TestVendingMachine
         public void TestBuyCoffeeInsufficientQuantity()
         {
             // Arrange
-            Context vendingMachine = new Context();
+            Context vendingMachine = new ();
 
             // Act
             bool itemSelected = vendingMachine.SelectItem("coffee", 15); // Buy 15 coffees
@@ -72,22 +72,22 @@ namespace TestVendingMachine
         public void TestResetItem()
         {
             // Arrange
-            Context vendingMachine = new Context();
+            Context vendingMachine = new ();
 
-            int initialMilkCount = vendingMachine.data["milk"].Item1;
+            int initialMilkCount = vendingMachine.Data["milk"].Item1;
 
             // Act - Select 6 coffees, then reset with 10 milks
             bool coffeeSelected = vendingMachine.SelectItem("coffee", 6);
-            bool milkSelected = vendingMachine.SelectItem("milk", 10);
-            string currentItem = vendingMachine.item;
+            vendingMachine.SelectItem("milk", 10);
+            string currentItem = vendingMachine.Item;
             bool milkMoneyInserted = vendingMachine.InsertMoney(100); // Assuming coffee costs 15 each
             bool milkDispensed = vendingMachine.DispenseItem();
 
-            int finalMilkCount = vendingMachine.data["milk"].Item1;
+            int finalMilkCount = vendingMachine.Data["milk"].Item1;
 
             // Assert - Check selection and purchase
             Assert.IsTrue(coffeeSelected, "Coffee selection should succeed.");
-            Assert.AreEqual("milk", currentItem, "Item succesfully resetted to milk");
+            Assert.AreEqual("milk", currentItem, "Item succesfully resetted to milk"); 
             Assert.IsTrue(milkMoneyInserted, "Money insertion for milk should succeed.");
             Assert.IsTrue(milkDispensed, "Milk dispensing should succeed.");
 
@@ -100,7 +100,7 @@ namespace TestVendingMachine
         public void TestInsertMoneyBeforeSelectingItem()
         {
             // Arrange
-            Context vendingMachine = new Context();
+            Context vendingMachine = new ();
 
             // Act
             bool moneyInserted = vendingMachine.InsertMoney(10);
@@ -113,7 +113,7 @@ namespace TestVendingMachine
         public void TestDispenseBeforeSelectingItem()
         {
             // Arrange
-            Context vendingMachine = new Context();
+            Context vendingMachine = new ();
 
             // Act
             bool itemDispensed = vendingMachine.DispenseItem();
@@ -126,7 +126,7 @@ namespace TestVendingMachine
         public void TestDispenseBeforeInsertingMoney()
         {
             // Arrange
-            Context vendingMachine = new Context();
+            Context vendingMachine = new ();
 
             // Act
             bool itemSelected = vendingMachine.SelectItem("coffee", 2);
@@ -141,7 +141,7 @@ namespace TestVendingMachine
         public void TestInsertingInsufficientMoney()
         {
             // Arrange
-            Context vendingMachine = new Context();
+            Context vendingMachine = new ();
 
             // Act - Select coffee and insert insufficient money
             bool itemSelected = vendingMachine.SelectItem("coffee", 2);
@@ -160,7 +160,7 @@ namespace TestVendingMachine
         public void TestBuyMultipleCoffeesAndMilk()
         {
             // Arrange
-            Context vendingMachine = new Context();
+            Context vendingMachine = new ();
 
             // Act - Buy 5 coffees, insert money, and dispense
             bool coffeeSelected = vendingMachine.SelectItem("coffee", 5);
@@ -188,7 +188,7 @@ namespace TestVendingMachine
             // Assert - Check milk selection
             Assert.IsFalse(milkSelected1, "Milk selection should fail due to insufficient stock");
 
-            Assert.AreEqual(10, vendingMachine.data["milk"].Item1, "Milk quantity before buying should be 10.");
+            Assert.AreEqual(10, vendingMachine.Data["milk"].Item1, "Milk quantity before buying should be 10.");
         }
 
 
