@@ -16,6 +16,8 @@ Key concepts of the State Design Pattern:
 
 This project leverages the State Design Pattern to effectively manage different vending machine states. Each state, such as selecting items, processing payments, and dispensing products, is encapsulated within separate classes. This approach promotes code clarity, making it easier to understand and extend.
 
+![State Diagram](https://github.com/padath314/VendingMachine/blob/master/stateDiagram.jpg)
+
 ## Implementation
 
 The project includes C# code files that serve as practical examples of the State Design Pattern. It comprises the main vending machine class, state interfaces, and example state classes, demonstrating how to implement the pattern effectively.
